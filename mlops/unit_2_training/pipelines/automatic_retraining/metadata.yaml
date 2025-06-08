@@ -11,13 +11,31 @@ blocks:
   executor_type: local_python
   has_callback: false
   language: python
-  name: detect new data
+  name: detect_new_data
   retry_config: null
   status: executed
   timeout: null
   type: sensor
   upstream_blocks: []
   uuid: detect_new_data
+- all_upstream_blocks_executed: true
+  color: yellow
+  configuration:
+    file_source:
+      path: unit_2_training/custom/retrain/xgboost.py
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: retrain/xgboost
+  retry_config: null
+  status: updated
+  timeout: null
+  type: custom
+  upstream_blocks:
+  - detect_new_data
+  uuid: retrain/xgboost
 - all_upstream_blocks_executed: true
   color: teal
   configuration:
@@ -36,24 +54,6 @@ blocks:
   upstream_blocks:
   - detect_new_data
   uuid: retrain/sklearn
-- all_upstream_blocks_executed: true
-  color: yellow
-  configuration:
-    file_source:
-      path: unit_2_training/custom/retrain/xgboost.py
-  downstream_blocks: []
-  executor_config: null
-  executor_type: local_python
-  has_callback: false
-  language: python
-  name: retrain/xgboost
-  retry_config: null
-  status: not_executed
-  timeout: null
-  type: custom
-  upstream_blocks:
-  - detect_new_data
-  uuid: retrain/xgboost
 cache_block_output_in_memory: false
 callbacks: []
 concurrency_config: {}
